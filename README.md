@@ -8,4 +8,4 @@
 4. Upload to host
 
 # What if I do not understand?
-Come to me at the Discord, I will help you
+Come to me at the [Discord](https://discord.gg/sKXsSND), I will help you
