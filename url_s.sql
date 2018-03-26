@@ -37,7 +37,7 @@ CREATE TABLE `urls` (
 --
 
 INSERT INTO `urls` (`id`, `url`, `short_url`) VALUES
-(27, 'https://withdipper.tk', 'owner');
+(1, 'https://withdipper.tk', 'owner');
 
 --
 -- Indexes for dumped tables
