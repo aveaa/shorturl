@@ -1,25 +1,28 @@
-////////////////////////
-//IT'S ENGLISH VERSION//
-////////////////////////
-
 <?php 
 require_once('config.php');
 ?>
 
 
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>URL4ME</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width; initial-scale=0.6">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro:200,100">
+        <meta name="theme-color" content="#ffffff">
+        <title>Сокращение ссылки</title>
+        <style type="text/css" media="all">
+            body{background:white;}
+            h2{color:black; font-weight:200; text-align: center;
+                font-size: 2.5em; font-family: Helvetica, sans-serif;}
+			p{color:black; font-weight:100; text-align: center;
+                font-size: 1.5em; font-family: Helvetica, sans-serif;}
+			input{color:black; font-weight:100; text-align: center;
+                font-size: 1.5em; font-family: Helvetica, sans-serif;}
+            #words{position: fixed; top:40%; height:5em; width:100%}
+        </style>
+    </head>
+    <body>
+        <div id="words">
 			<?php 
 
 if(isset($_POST['submit']) && $_POST['url-shorter'] != ""){
@@ -37,6 +40,13 @@ if(substr($_POST['url-shorter'],0,8) != 'http://'){
 	$url = $_POST['url-shorter'];
 }
 
+if(substr($_POST['url-shorter'],0,8) != 'https://'){
+	
+	$url = 'https://'.$_POST['url-shorter'];
+}else{
+	$url = $_POST['url-shorter'];
+}
+
 	//insert link into our database
 
 	$result ="";
@@ -45,7 +55,7 @@ if(substr($_POST['url-shorter'],0,8) != 'http://'){
 	$result->bind_param("ss",$url,$title);
 	
 	$result->execute();
-	echo "<p class='alert alert-success text-center'>Your URL is shorted</p>";
+	echo "<h2>Ваша ссылка сокращена</h2>";
 	$result = $db->prepare("SELECT * FROM urls WHERE short_url=?");
 
 	$result->bind_param("s",$title);
@@ -54,25 +64,18 @@ if(substr($_POST['url-shorter'],0,8) != 'http://'){
 
 	$goto = $result->get_result()->fetch_array();
 	//print_r($goto[2]);
-	 $surl ='domain.com'.$goto[2];
-	 echo 'Short URL -  '. $surl;
+	 $surl = $site_d.'/'.$goto[2];
+	 echo '<h2>Сокращенный URL - <a href="'.$surl.'" target="_blank">'.$surl.'</a></h2>';
 }else{
-	$error = 'Paste URL';
+	$error = '<h2>Вставьте URL</h2>';
 	echo $error;
 }
 			?>
 				<form action="" method="post">
-				<div class="form-group">
-					<label for="url">Url</label>
-					<input type="text" class="form-control" name="url-shorter">
-					<p>Do not submit http:// and https://</p>
-				</div>
-				<input type="submit" name="submit" placeholder="Paste URL..">
+				<center><input type="text" class="form-control" name="url-shorter"></center>
+					<p>Copyright © <a href="/owner" target="_blank">https://vladciphersky.xyz</a></p>
+					<p><a href="/SByD" target="_blank">OpenSource || Открытые исходники</a></p>
+				<center><input type="submit" name="submit" placeholder="Вставьте URL"></center>
 				</form>
-			</div>
-			
-		</div>
-	</div>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
-</html>
+        </div>
+</body></html>
