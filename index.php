@@ -65,7 +65,7 @@ if(substr($_POST['url-shorter'],0,8) != 'https://'){
 	$goto = $result->get_result()->fetch_array();
 	//print_r($goto[2]);
 	 $surl = $site_d.'/'.$goto[2];
-	 echo '<h2>Сокращенный URL - <a href="'.$surl.'" target="_blank">'.$surl.'</a></h2>';
+	 echo '<h2>Сокращенный URL: <a href="'.$surl.'" target="_blank">'.$surl.'</a></h2>';
 }else{
 	$error = '<h2>Вставьте URL</h2>';
 	echo $error;
@@ -73,8 +73,8 @@ if(substr($_POST['url-shorter'],0,8) != 'https://'){
 			?>
 				<form action="" method="post">
 				<center><input type="text" class="form-control" name="url-shorter"></center>
-					<p>Copyright © <a href="/owner" target="_blank">https://vladciphersky.xyz</a></p>
-					<p><a href="/SByD" target="_blank">OpenSource || Открытые исходники</a></p>
+					<p>Copyright © <a href="https://vladciphersky.xyz" target="_blank">https://vladciphersky.xyz</a></p>
+					<p><a href="https://github.com/vcxyz/shorturl" target="_blank">OpenSource || Открытые исходники</a></p>
 				<center><input type="submit" name="submit" placeholder="Вставьте URL"></center>
 				</form>
         </div>
