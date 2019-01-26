@@ -1,9 +1,11 @@
 <?php 
-// MySQL
-$db = new mysqli('sql_host','sql_user','sql_pass','sql_name');
+$db = new mysqli('localhost','username','password','base'); // Connect to database (MySQL)
 
-function generateRandomString($length = 10) {
-    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+$site_d = "http://domain.com"; // Your domain
+$lt = "4"; // Amount characters on the short link
+
+function generateRandomString($length = $lt) {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     $charactersLength = strlen($characters);
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
@@ -11,37 +13,18 @@ function generateRandomString($length = 10) {
     }
     return $randomString;
 }
-/*
-if(mysqli_errno($db)){
-	echo "conection failed";
-}else{
-	echo "connect Success";
-}
-*/
 
 if(isset($_GET['code'])){
-//select code from database
-//echo $_GET['code'];
-
 	$result = '';
-
 	$result = $db->prepare("SELECT * FROM urls WHERE short_url=?");
-
 	$result->bind_param("s",$_GET['code']);
-	
 	$result->execute();
-
 	$goto = $result->get_result()->fetch_array();
+	
 	if($goto){
 		header("Location: $goto[1]");
 	}else{
-	echo "";
+		echo "";
 	}
-
-	
-
 }
-
-
-
 ?>
