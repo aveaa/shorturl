@@ -40,12 +40,6 @@ if(substr($_POST['url-shorter'],0,8) != 'http://'){
 	$url = $_POST['url-shorter'];
 }
 
-if(substr($_POST['url-shorter'],0,8) != 'https://'){
-	
-	$url = 'https://'.$_POST['url-shorter'];
-}else{
-	$url = $_POST['url-shorter'];
-}
 
 	//insert link into our database
 
